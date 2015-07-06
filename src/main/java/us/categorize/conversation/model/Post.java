@@ -4,11 +4,18 @@ import java.util.Date;
 
 public class Post {
 	private String id;
+	private String title;
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
 	private String body;
 	private String tags[];
 	private String authorId;
 	private String authorName;
-	private Date createdAt;
+	private Date createdAt = new Date();
 	public String getId() {
 		return id;
 	}

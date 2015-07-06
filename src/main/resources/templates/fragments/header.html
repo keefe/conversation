@@ -24,7 +24,6 @@
                             as <a th:href="${currentUserConnection.profileUrl}" class="navbar-link"><span th:text="${currentUserDisplayName}"/></a>
                             <img th:src="${currentUserConnection.imageUrl}" width="32" height="32" />
                             <form method="POST" th:action="@{/logout}">
-       				             <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
                     			<button>Logout</button>
                 			</form>
                         </p>
