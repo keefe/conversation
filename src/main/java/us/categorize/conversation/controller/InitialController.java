@@ -18,8 +18,8 @@ import us.categorize.conversation.model.UserProfile;
 
 @Controller
 public class InitialController {
-    private static final String USER_CONNECTION = "MY_USER_CONNECTION";
-    private static final String USER_PROFILE = "MY_USER_PROFILE";
+    public static final String USER_CONNECTION = "MY_USER_CONNECTION";
+    public static final String USER_PROFILE = "MY_USER_PROFILE";
 
     @Autowired
     private UserDao userDao;
