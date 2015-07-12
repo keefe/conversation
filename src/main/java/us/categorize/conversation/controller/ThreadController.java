@@ -4,6 +4,7 @@ import java.security.Principal;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -21,14 +22,15 @@ import us.categorize.conversation.service.PostService;
 @RestController 
 public class ThreadController {
 
-	private PostService service = new PostService();
+	@Autowired
+	private PostService service;
 	
 	@RequestMapping(value="/thread/{threadId}", method = RequestMethod.GET)
 	public Post thread(HttpServletRequest request, Principal currentUser, @PathVariable String threadId){
 		UserConnection uc = (UserConnection) request.getSession().getAttribute(InitialController.USER_CONNECTION);
         String userId = currentUser == null ? null : currentUser.getName();
         System.out.println("We're logged in as " + userId + " which is " + uc.getDisplayName());
-		Post post = service.get(threadId);
+		Post post = service.get(Long.parseLong(threadId));
 		System.out.println("Post " + post);
 		return post;
 	}

@@ -3,26 +3,40 @@ package us.categorize.conversation.service;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Service;
+
+import us.categorize.conversation.dao.PostDao;
+import us.categorize.conversation.dao.UserDao;
 import us.categorize.conversation.model.Post;
 
+@Service
 public class PostService {
-
+	
+    @Autowired
+    private UserDao userDao;
+    
+    @Autowired
+    private PostDao postDao;
+    
 	private Map<String, Post> threads = new HashMap<>();
 	
 	public PostService(){
-		Post post = new Post();
-		post.setId("test");
-		post.setBody("This is a test body");
-		post.setTags(new String[]{"tag1", "tag2", "tag3"});
-		set(post);
+		
 	}
 	
-	public Post get(String id){
-		return threads.get(id);
+	public PostService(UserDao userDao, PostDao postDao){
+		this.userDao = userDao;
+		this.postDao = postDao;
+	}
+	
+	public Post get(long id){
+		return postDao.fetch(id);
 	}
 	
 	public void set(Post thread){
-		threads.put(thread.getId(), thread);
+		Post setPost = postDao.create(thread);		
 	}
 	
 }
