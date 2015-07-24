@@ -13,3 +13,4 @@ grant all privileges on database "categorizeus" to categorizeus;
 5. If you want to run multiple installs, just change the data directory on postgres and do this again. 
 6. In schema.sql the first time you run, you should uncomment the create index so these get created ( block at the bottom of file)
 
+*please carefully install maven first
