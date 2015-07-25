@@ -29,3 +29,8 @@ When making UI updates, the files in src/main/resource/static are updated AT RUN
 This means that when making changes there only (js, css, client side templates) That it is not necessary to restart the server.
 However, a hard reload of the website is necessary, which is command shift r on chrome in mac. 
 
+To make an update with new database changes, you need to go into psql and run
+drop table posts;
+drop table userconnection;
+
+
