@@ -5,100 +5,22 @@
     <head>
         <title>Main Page</title>
 		<title>categorize.us</title>
-		<style>
-			.newThread{
-				border: 1px solid red;
-				position: absolute;
-				right: 20px;
-				top: 60px;
-			}
-		</style>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         <link rel="stylesheet" type="text/css" href="css/bootstrap-social.css" />
+        <link rel="stylesheet" type="text/css" href="css/categorizeus.css" />
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" />
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js" />
+        <script src="js/categorizeus.js"/>
         <script type="text/javascript">
-        $.fn.serializeObject = function()
-{
-   var o = {};
-   var a = this.serializeArray();
-   $.each(a, function() {
-       if (o[this.name]) {
-           if (!o[this.name].push) {
-               o[this.name] = [o[this.name]];
-           }
-           o[this.name].push(this.value || '');
-       } else {
-           o[this.name] = this.value || '';
-       }
-   });
-   return o;
-};
         	$(document).ready(function(){
         		console.log("Here we go then");
-        		var newPost = {
-        			id:"test2",
-        			title:"test title",
-        			body:"Here is a body"
-        		};
-        		$.ajax({
-        			type:"POST",
-        			url:"/thread",
-        			contentType:"application/json",
-        			dataType:"json",
-        			data:JSON.stringify(newPost), 
-        			success:function(){
-        				console.log("We've had some sucess then");
-        			}
-        		});
-        		
-        		$("#btnPost").click(function(event){
-        			$(".newThread").css("display","block");
-        		});
-        		
-        		$("#btnPostIt").click(function(event){
-        			event.preventDefault();
-        			$(".newThread").css("display","none");
-        			var newBody = $("#newPostForm").serializeObject();
-        			console.log("We've found it then");
-        			console.log(newBody)
-        			$("#newPostForm")[0].reset();
-	        		$.ajax({
-	        			type:"POST",
-	        			url:"/thread",
-	        			contentType:"application/json",
-	        			dataType:"json",
-	        			data:JSON.stringify(newBody), 
-	        			success:function(){
-	        				console.log("Why isn't this callback being triggered?");
-	        			}
-	        		});        			
-        			
-        		});
-        		
-        		$("#btnLoadOne").click(function(event){
-        			event.preventDefault();
-        			var whichId = $("#id").val();
-        			console.log("We'd like to load " + whichId);
-        			$("#newPostForm")[0].reset();
-        			
-	        		$.ajax({
-	        			type:"GET",
-	        			url:"/thread/"+whichId,
-	        			dataType:"json",
-	        			success:function(data){
-	        				console.log("We've had some success then");
-	        				$("#output").append("<p>"+JSON.stringify(data)+"</p>");
-	        			}
-	        		});        			
-        			
-        		});
+        		initialize();
         	});
         </script>
     </head>
@@ -107,12 +29,17 @@
 
 
         <div th:replace="fragments/header :: userInfo"/>
+        <div id="search">
+			<input type="text" width="250" id="txtSearch"/> 
+			<input type="button" id="btnSearch" value="Search"/> 
+			<input type="button" id="btnLoad" value="Load"/>               
+        </div>
 		This page has nothing on it. 
 		  
         <div id="output"></div>
         <div class="container">
 
-            <div th:replace="fragments/exception :: errorInfo"/>
+           	<div th:replace="fragments/exception :: errorInfo"/>
 
         </div><!-- /.container -->
         

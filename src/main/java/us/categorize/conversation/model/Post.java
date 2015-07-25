@@ -29,28 +29,26 @@ public class Post {
 	private String title;
 	
 	@OneToOne (cascade=CascadeType.REFRESH)
-	@JoinColumn(name="parent_id", unique= true, nullable=true, insertable=true, updatable=true)
+	@JoinColumn(name="parentId", unique= true, nullable=true, insertable=true, updatable=true)
 	private Post parent;
 	  
 	
 	@OneToOne (cascade=CascadeType.REFRESH)
-	@JoinColumn(name="thread_id", unique= true, nullable=true, insertable=true, updatable=true)
+	@JoinColumn(name="threadId", unique= true, nullable=true, insertable=true, updatable=true)
 	private Post thread;
 
 	private String body;
 	
-	//private String tags[];
-	//private String authorId;
-	//private String authorName;
-	
 	@OneToOne (cascade=CascadeType.REFRESH)
-	@JoinColumn(name="author_id", unique= true, nullable=true, insertable=true, updatable=true)
+	@JoinColumn(name="authorId", unique= true, nullable=true, insertable=true, updatable=true)
 	private UserConnection user;
 	
-	@Column(name="created_at")
 	private Date createdAt = new Date();
 
+	private String tag1,tag2,tag3,tag4,tag5;
 
+	private String imageUrl;
+	
 	public long get_id() {
 		return _id;
 	}

@@ -32,14 +32,20 @@ create table if not exists  UserProfile (
   username varchar(255),
   primary key (userId));
   
-create table if not exists Posts(
+create table if not exists posts(
 	id bigint not null, 
 	title varchar(255), 
 	body text, 
-	parent_id bigint, 
-	thread_id bigint,
-	created_at timestamp, 
-	author_id varchar(255),
+	parentId bigint, 
+	threadId bigint,
+	createdAt timestamp, 
+	authorId varchar(255),
+	tag1 varchar(255),
+	tag2 varchar(255),
+	tag3 varchar(255),
+	tag4 varchar(255),
+	tag5 varchar(255),
+	imageUrl varchar(255),
 	primary key (id)
 );
 
