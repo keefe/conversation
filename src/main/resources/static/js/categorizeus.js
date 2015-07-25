@@ -45,7 +45,6 @@
 			    var template = "No Load"
 				getTemplate("post", function(tmpl){
 					template = tmpl;
-					
 				});
 				
         		$("#btnPost").click(function(event){
