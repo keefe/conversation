@@ -34,8 +34,20 @@
 	        		});        			
         			
         		};
-        		
-var initialize = function(){
+        	var getTemplate = function(name, callback) {
+ 			   return $.get('/templates/'+name+'.hbrs').then(function(src) {
+ 			    console.log("We've found")
+ 			    console.log(src)
+       			callback(Handlebars.compile(src));
+   			 });
+}
+			var initialize = function(){
+			    var template = "No Load"
+				getTemplate("post", function(tmpl){
+					template = tmpl;
+					
+				});
+				
         		$("#btnPost").click(function(event){
         			$(".newThread").css("display","block");
         			$("#btnPostIt").one("click", postNewThread);
@@ -58,7 +70,7 @@ var initialize = function(){
 	        			dataType:"json",
 	        			success:function(data){
 	        				console.log("We've had some success then");
-	        				$("#output").append("<p>"+JSON.stringify(data)+"</p>");
+	        				$("#output").append(template(data));
 	        			}
 	        		});        			
         			
