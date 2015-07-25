@@ -4,12 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import us.categorize.conversation.dao.PostDao;
 import us.categorize.conversation.dao.UserDao;
 import us.categorize.conversation.model.Post;
+import us.categorize.conversation.model.PostRepository;
 
 @Service
 public class PostService {
@@ -18,7 +18,7 @@ public class PostService {
     private UserDao userDao;
     
     @Autowired
-    private PostDao postDao;
+    private PostRepository postRepository;
     
 	private Map<String, Post> threads = new HashMap<>();
 	
@@ -26,17 +26,12 @@ public class PostService {
 		
 	}
 	
-	public PostService(UserDao userDao, PostDao postDao){
-		this.userDao = userDao;
-		this.postDao = postDao;
-	}
-	
 	public Post get(long id){
-		return postDao.fetch(id);
+		return postRepository.findOne(id);
 	}
 	
 	public void set(Post thread){
-		Post setPost = postDao.create(thread);		
+		postRepository.save(thread);	
 	}
 	
 }

@@ -8,7 +8,7 @@
       authority varchar(50) not null,
       constraint fk_authorities_users foreign key(username) references users(username));
         
-create table if not exists UserConnection (
+create table if not exists userconnection (
   userId varchar(255) not null,
   providerId varchar(255) not null,
   providerUserId varchar(255),
@@ -20,7 +20,7 @@ create table if not exists UserConnection (
   secret varchar(255),
   refreshToken varchar(255),
   expireTime bigint,
-  primary key (userId, providerId, providerUserId));
+  primary key (userId));
 
 
 create table if not exists  UserProfile (
@@ -36,8 +36,10 @@ create table if not exists Posts(
 	id bigint not null, 
 	title varchar(255), 
 	body text, 
-	parentId bigint, 
-	threadId bigint, 
+	parent_id bigint, 
+	thread_id bigint,
+	created_at timestamp, 
+	author_id varchar(255),
 	primary key (id)
 );
 

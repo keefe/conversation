@@ -34,8 +34,6 @@ public class PostDao {
 						newPost.set_id(rs.getLong("id"));
 						newPost.setTitle(rs.getString("title"));
 						newPost.setBody(rs.getString("body"));
-						newPost.setParentId(rs.getLong("parentId"));
-						newPost.setThreadId(rs.getLong("threadId"));
 						return newPost;
 					}
     		
@@ -54,9 +52,7 @@ public class PostDao {
     	jdbcTemplate.update(createSQL, 
     			source.get_id(),
     			source.getTitle(),
-    			source.getBody(), 
-    			source.getParentId(),
-    			source.getThreadId()
+    			source.getBody()
     			);
     	
     	return source;

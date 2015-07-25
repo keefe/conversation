@@ -37,9 +37,8 @@ public class ThreadController {
 	
 	@RequestMapping(value="/thread", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> createThread(HttpServletRequest request, Principal currentUser, @RequestBody Post newThread){
-		newThread.setAuthorId(currentUser.getName());
 		UserConnection uc = (UserConnection) request.getSession().getAttribute(InitialController.USER_CONNECTION);
-		newThread.setAuthorName(uc.getDisplayName());
+		newThread.setUser(uc);
 		service.set(newThread);
         HttpHeaders httpHeaders = new HttpHeaders();
         return new ResponseEntity<>(null, httpHeaders, HttpStatus.OK);
