@@ -1,4 +1,4 @@
-			  <div class="entry">
+			  <div class="entry" id ="{{_id}}">
 			    <h1>{{title}}</h1>
 			    <h2>{{tagString}}</h2>
 			    
@@ -8,4 +8,6 @@
 			    <div class="body">
 			      {{body}}
 			    </div>
+			    <input type="button" id="btnReply"/>
+			    <input type="button" id="btnView"/>
 			  </div>
