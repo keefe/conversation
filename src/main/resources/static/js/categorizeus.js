@@ -89,5 +89,24 @@
 	        		});        			
         			
         		});
+        		
+        		$("#btnSearch").click(function(event){
+        		    event.preventDefault();
+        			var whichTags = $("#txtSearch").val();
+        			$("#output").html("");
+        			$.ajax({
+	        			type:"GET",
+	        			url:"/tagged?tags="+whichTags,
+	        			dataType:"json",
+	        			success:function(data){
+	        				console.log("We've had some success then");
+	        				console.log(data)
+	        				var i =0;
+	        				for(i=0; i<data.length;i++){
+	        					$("#output").append(applyTemplate("post", data[i]));
+	        				}
+	        			}
+	        		});
+        		});
 
 }

@@ -6,8 +6,7 @@
                 <label for="tagString">Tags</label>
                 <input type="text" name="tagString" id="tagString"/><br/>
                 <label for="body">Body</label>
-                <textarea rows="4" cols="50" name="body" id="body">
-                </textarea>
+                <textarea rows="4" cols="50" name="body" id="body"></textarea>
                 <br/>
                 <button id="btnPostIt">Create New Post</button>
                 <button id="btnCancelPostIt">Cancel</button>

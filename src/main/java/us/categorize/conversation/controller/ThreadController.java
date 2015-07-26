@@ -1,6 +1,8 @@
 package us.categorize.conversation.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.security.Principal;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,7 +15,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriUtils;
 
 import us.categorize.conversation.model.Post;
 import us.categorize.conversation.model.UserConnection;
@@ -24,6 +28,17 @@ public class ThreadController {
 
 	@Autowired
 	private PostService service;
+	
+	@RequestMapping(value="/tagged", method = RequestMethod.GET)
+	public List<Post> getByTag(HttpServletRequest request, Principal currentUser, @RequestParam("tags") String tags){
+		try {
+			tags = UriUtils.decode(tags, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		String tagArray[] = tags.split(" ");
+		return service.byTag(tagArray);
+	}
 	
 	@RequestMapping(value="/thread/{threadId}", method = RequestMethod.GET)
 	public Post thread(HttpServletRequest request, Principal currentUser, @PathVariable String threadId){
@@ -40,7 +55,7 @@ public class ThreadController {
 		UserConnection uc = (UserConnection) request.getSession().getAttribute(InitialController.USER_CONNECTION);
 		newThread.setUser(uc);
 		if(newThread.getTagString() !=null){
-			String tags[] = newThread.getTagString().split(",");
+			String tags[] = newThread.getTagString().split(" ");
 			if(tags.length>=1){
 				newThread.setTag1(tags[0]);
 			}

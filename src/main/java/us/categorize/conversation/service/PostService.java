@@ -1,12 +1,11 @@
 package us.categorize.conversation.service;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import us.categorize.conversation.dao.PostDao;
 import us.categorize.conversation.dao.UserDao;
 import us.categorize.conversation.model.Post;
 import us.categorize.conversation.model.PostRepository;
@@ -19,11 +18,17 @@ public class PostService {
     
     @Autowired
     private PostRepository postRepository;
-    
-	private Map<String, Post> threads = new HashMap<>();
-	
+    	
 	public PostService(){
 		
+	}
+	
+	public List<Post> byTag(String... tags){
+		System.out.println("Searching with " + Arrays.toString(tags));
+		if(tags.length>=2){
+			return postRepository.findBy2Tags(tags[0], tags[1]);
+		}
+		return  postRepository.findBy1Tag(tags[0]);
 	}
 	
 	public Post get(long id){
