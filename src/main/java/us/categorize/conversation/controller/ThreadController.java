@@ -39,7 +39,26 @@ public class ThreadController {
 	public ResponseEntity<?> createThread(HttpServletRequest request, Principal currentUser, @RequestBody Post newThread){
 		UserConnection uc = (UserConnection) request.getSession().getAttribute(InitialController.USER_CONNECTION);
 		newThread.setUser(uc);
+		if(newThread.getTagString() !=null){
+			String tags[] = newThread.getTagString().split(",");
+			if(tags.length>=1){
+				newThread.setTag1(tags[0]);
+			}
+			if(tags.length>=2){
+				newThread.setTag2(tags[1]);
+			}
+			if(tags.length>=3){
+				newThread.setTag3(tags[2]);
+			}
+			if(tags.length>=4){
+				newThread.setTag4(tags[3]);
+			}
+			if(tags.length>=5){
+				newThread.setTag5(tags[4]);
+			}
+		}
 		service.set(newThread);
+		
         HttpHeaders httpHeaders = new HttpHeaders();
         return new ResponseEntity<>(null, httpHeaders, HttpStatus.OK);
 	}

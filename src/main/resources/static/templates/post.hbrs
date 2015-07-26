@@ -1,6 +1,9 @@
 			  <div class="entry">
 			    <h1>{{title}}</h1>
+			    <h2>{{tagString}}</h2>
+			    
 			    <h2>{{user.displayName}}</h2>
+			    <h2>{{user.userId}}</h2>
 			    <img src = "{{user.imageUrl}}"/>
 			    <div class="body">
 			      {{body}}

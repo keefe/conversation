@@ -41,18 +41,35 @@
        			callback(Handlebars.compile(src));
    			 });
 }
+			var templateNames = ["post", "newpost"]
+			var templates = {}
+			var applyTemplate = function(templateName, data){
+				return templates[templateName](data);
+			}
+			
 			var initialize = function(){
 			    var template = "No Load"
-				getTemplate("post", function(tmpl){
-					template = tmpl;
-				});
+			    var i;
+			    for(i=0; i<templateNames.length;i++){
+			    	(function(){
+			    		var name = templateNames[i];
+						getTemplate(name, function(tmpl){
+							templates[name] = tmpl;
+						});
+					}());    
+			    }
+				
+				//TODO import async or underscore and do this properly
+				
 				
         		$("#btnPost").click(function(event){
+        			$(".newThread").html(applyTemplate("newpost", {}));
         			$(".newThread").css("display","block");
         			$("#btnPostIt").one("click", postNewThread);
         		});
         		
         		$("#btnCancelPostIt").click(function(event){
+        		    event.preventDefault();
         		    $(".newThread").css("display","none");
         		    $("#btnPostIt").off("click");
         		});
@@ -60,16 +77,14 @@
         		$("#btnLoad").click(function(event){
         			event.preventDefault();
         			var whichId = $("#txtSearch").val();
-        			console.log("We'd like to load " + whichId);
-        			$("#newPostForm")[0].reset();
-        			
+        			console.log("We'd like to load " + whichId);        			
 	        		$.ajax({
 	        			type:"GET",
 	        			url:"/thread/"+whichId,
 	        			dataType:"json",
 	        			success:function(data){
 	        				console.log("We've had some success then");
-	        				$("#output").append(template(data));
+	        				$("#output").append(applyTemplate("post", data));
 	        			}
 	        		});        			
         			
