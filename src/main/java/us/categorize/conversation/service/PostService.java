@@ -25,10 +25,16 @@ public class PostService {
 	
 	public List<Post> byTag(String... tags){
 		System.out.println("Searching with " + Arrays.toString(tags));
-		if(tags.length>=2){
-			return postRepository.findBy2Tags(tags[0], tags[1]);
+		if(tags.length>=5){
+			return postRepository.findByTags(tags[0], tags[1], tags[2], tags[3], tags[4]);
+		}else if(tags.length==4){
+			return postRepository.findByTags(tags[0], tags[1], tags[2], tags[3]);
+		}else if(tags.length==3){
+			return postRepository.findByTags(tags[0], tags[1], tags[2]);
+		}else if(tags.length==2){
+			return postRepository.findByTags(tags[0], tags[1]);
 		}
-		return  postRepository.findBy1Tag(tags[0]);
+		return  postRepository.findByTags(tags[0]);
 	}
 	
 	public Post get(long id){
