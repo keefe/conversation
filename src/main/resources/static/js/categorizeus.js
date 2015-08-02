@@ -46,6 +46,13 @@
 			var applyTemplate = function(templateName, data){
 				return templates[templateName](data);
 			}
+			var cancelFunction = function(event){
+        		    event.preventDefault();
+        		    console.log("Clicking Cancel");
+        		    
+        		    $(".newThread").css("display","none");
+        		    $("#btnPostIt").off("click");
+        		}
 			
 			var initialize = function(){
 			    var template = "No Load"
@@ -66,14 +73,9 @@
         			$(".newThread").html(applyTemplate("newpost", {}));
         			$(".newThread").css("display","block");
         			$("#btnPostIt").one("click", postNewThread);
+        			$("#btnCancelPostIt").click(cancelFunction);//TODO is this adding many too many handlers?
         		});
-        		
-        		$("#btnCancelPostIt").click(function(event){
-        		    event.preventDefault();
-        		    $(".newThread").css("display","none");
-        		    $("#btnPostIt").off("click");
-        		});
-        		
+        		        		
         		$("#btnLoad").click(function(event){
         			event.preventDefault();
         			var whichId = $("#txtSearch").val();

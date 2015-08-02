@@ -8,6 +8,6 @@
 			    <div class="body">
 			      {{body}}
 			    </div>
-			    <input type="button" id="btnReply"/>
-			    <input type="button" id="btnView"/>
+			    <input type="button" id="btnReply" value="Reply"/>
+			    <input type="button" id="btnView"/ value="View">
 			  </div>
