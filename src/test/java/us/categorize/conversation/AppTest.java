@@ -1,4 +1,4 @@
-package us.caregorize.conversation;
+package us.categorize.conversation;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
