@@ -91,6 +91,24 @@
 	        		});        			
         			
         		});
+        		var findId = function(event){
+        		   var target = $( event.target );
+        		   var classes = target.attr("class").split(" ");
+        		   for(var c in classes){
+        		    var clazz = classes[c];
+        		   	if(clazz.startsWith("id-")){
+        		   		return parseInt(clazz.replace("id-",""));
+        		   	}
+        		   }	
+        		   return undefined;
+        		}
+        		var replyCallback = function(event){
+        			console.log("Reply For " + findId(event));
+        		};
+        		var viewCallback = function(event){
+        			var target = $( event.target );
+        			console.log("View For " + findId(event));
+        		};        		
         		
         		$("#btnSearch").click(function(event){
         		    event.preventDefault();
@@ -106,6 +124,9 @@
 	        				var i =0;
 	        				for(i=0; i<data.length;i++){
 	        					$("#output").append(applyTemplate("post", data[i]));
+	        					var lastChild = $('#output').children('.entry').last();
+	        					lastChild.find(".button-view").click(viewCallback);
+	        					lastChild.find(".button-reply").click(replyCallback);
 	        				}
 	        			}
 	        		});
