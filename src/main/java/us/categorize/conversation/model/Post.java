@@ -57,6 +57,9 @@ public class Post {
 	@Transient
 	private String tagString;
 	
+	@Transient
+	private String repliesTo;
+	
 	
 	public long get_id() {
 		return _id;
@@ -213,6 +216,16 @@ public class Post {
 	public void setTagString(String tagString) {
 
 		this.tagString = tagString;
+	}
+
+
+	public String getRepliesTo() {
+		return repliesTo;
+	}
+
+
+	public void setRepliesTo(String repliesTo) {
+		this.repliesTo = repliesTo;
 	}
 
 	

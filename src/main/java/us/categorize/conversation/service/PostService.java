@@ -42,6 +42,7 @@ public class PostService {
 	}
 	
 	public void set(Post thread){
+		System.out.println(thread.toString());
 		postRepository.save(thread);	
 	}
 	

@@ -28,8 +28,10 @@
 	        			contentType:"application/json",
 	        			dataType:"json",
 	        			data:JSON.stringify(newBody), 
-	        			success:function(){
-	        				console.log("Why isn't this callback being triggered?");
+	        			success:function(postedData){
+	        				console.log("We've been done with posting the newthing");
+	        				console.log(JSON.stringify(postedData));
+	        				$(".newThread").html(applyTemplate("newpost", {}));
 	        			}
 	        		});        			
         			
@@ -49,11 +51,16 @@
 			var cancelFunction = function(event){
         		    event.preventDefault();
         		    console.log("Clicking Cancel");
-        		    
+        		    $(".newThread").html(applyTemplate("newpost", {}));
         		    $(".newThread").css("display","none");
         		    $("#btnPostIt").off("click");
         		}
-			
+			var postFunction = function(event){
+        			$(".newThread").css("display","block");
+        			$("#btnPostIt").one("click", postNewThread);
+        			$("#btnCancelPostIt").click(cancelFunction);//TODO is this adding many too many handlers?
+        		};
+        		
 			var initialize = function(){
 			    var template = "No Load"
 			    var i;
@@ -62,6 +69,10 @@
 			    		var name = templateNames[i];
 						getTemplate(name, function(tmpl){
 							templates[name] = tmpl;
+							if("newpost"==name){//TODO this needs to be like a async.series or something
+							    $(".newThread").html(applyTemplate("newpost", {}));							
+							}
+							
 						});
 					}());    
 			    }
@@ -69,12 +80,7 @@
 				//TODO import async or underscore and do this properly
 				
 				
-        		$("#btnPost").click(function(event){
-        			$(".newThread").html(applyTemplate("newpost", {}));
-        			$(".newThread").css("display","block");
-        			$("#btnPostIt").one("click", postNewThread);
-        			$("#btnCancelPostIt").click(cancelFunction);//TODO is this adding many too many handlers?
-        		});
+        		$("#btnPost").click(postFunction);
         		        		
         		$("#btnLoad").click(function(event){
         			event.preventDefault();
@@ -102,8 +108,11 @@
         		   }	
         		   return undefined;
         		}
+        		
         		var replyCallback = function(event){
         			console.log("Reply For " + findId(event));
+        			$("#replyField").attr("value", findId(event));
+        			postFunction(event);
         		};
         		var viewCallback = function(event){
         			var target = $( event.target );

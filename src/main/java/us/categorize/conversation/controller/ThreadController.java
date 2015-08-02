@@ -51,7 +51,7 @@ public class ThreadController {
 	}
 	
 	@RequestMapping(value="/thread", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> createThread(HttpServletRequest request, Principal currentUser, @RequestBody Post newThread){
+	public Post createThread(HttpServletRequest request, Principal currentUser, @RequestBody Post newThread){
 		UserConnection uc = (UserConnection) request.getSession().getAttribute(InitialController.USER_CONNECTION);
 		newThread.setUser(uc);
 		if(newThread.getTagString() !=null){
@@ -72,9 +72,20 @@ public class ThreadController {
 				newThread.setTag5(tags[4]);
 			}
 		}
+		if(newThread.getRepliesTo()!=null && !"".equals(newThread.getRepliesTo().trim())){
+			System.out.println("Deal with replies " + newThread.getRepliesTo());
+			Post repliesPost = service.get(Long.parseLong(newThread.getRepliesTo()));
+			newThread.setParent(repliesPost);
+			if(repliesPost!=null){
+				if(repliesPost.getThread()!=null){
+					newThread.setThread(repliesPost.getThread());
+				}else{
+					newThread.setThread(repliesPost);
+				}
+			}
+		}
 		service.set(newThread);
 		
-        HttpHeaders httpHeaders = new HttpHeaders();
-        return new ResponseEntity<>(null, httpHeaders, HttpStatus.OK);
+        return newThread;
 	}
 }
