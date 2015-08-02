@@ -15,6 +15,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="posts")
 public class Post {
@@ -30,11 +32,12 @@ public class Post {
    
 	private String title;
 	
+	@JsonIgnore
 	@OneToOne (cascade=CascadeType.REFRESH)
 	@JoinColumn(name="parentId", unique= true, nullable=true, insertable=true, updatable=true)
 	private Post parent;
 	  
-	
+	@JsonIgnore
 	@OneToOne (cascade=CascadeType.REFRESH)
 	@JoinColumn(name="threadId", unique= true, nullable=true, insertable=true, updatable=true)
 	private Post thread;
@@ -45,8 +48,10 @@ public class Post {
 	@JoinColumn(name="authorId", unique= true, nullable=true, insertable=true, updatable=true)
 	private UserConnection user;
 	
+	@JsonIgnore
 	private Date createdAt = new Date();
 
+	@JsonIgnore
 	private String tag1,tag2,tag3,tag4,tag5;
 
 	private String imageUrl;

@@ -7,10 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +35,12 @@ public class ThreadController {
 		}
 		String tagArray[] = tags.split(" ");
 		return service.byTag(tagArray);
+	}
+	
+	@RequestMapping(value="/fullThread/{threadId}", method = RequestMethod.GET)
+	public List<Post> fullThread(HttpServletRequest request, Principal currentUser, @PathVariable String threadId)
+	{
+		return service.loadThread(threadId);
 	}
 	
 	@RequestMapping(value="/thread/{threadId}", method = RequestMethod.GET)
@@ -83,6 +86,9 @@ public class ThreadController {
 					newThread.setThread(repliesPost);
 				}
 			}
+		}
+		if(newThread.getThread()==null){
+			newThread.setThread(newThread);
 		}
 		service.set(newThread);
 		

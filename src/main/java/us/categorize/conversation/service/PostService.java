@@ -23,6 +23,10 @@ public class PostService {
 		
 	}
 	
+	public List<Post> loadThread(String threadId){
+		return postRepository.findThread(Long.parseLong(threadId));
+	}
+	
 	public List<Post> byTag(String... tags){
 		System.out.println("Searching with " + Arrays.toString(tags));
 		if(tags.length>=5){
@@ -34,7 +38,8 @@ public class PostService {
 		}else if(tags.length==2){
 			return postRepository.findByTags(tags[0], tags[1]);
 		}
-		return  postRepository.findByTags(tags[0]);
+		List<Post> fullList =  postRepository.findByTags(tags[0]);
+		return fullList;
 	}
 	
 	public Post get(long id){

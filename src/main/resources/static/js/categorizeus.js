@@ -116,7 +116,25 @@
         		};
         		var viewCallback = function(event){
         			var target = $( event.target );
-        			console.log("View For " + findId(event));
+        			$("#output").html("");
+        			var whichId = findId(event);
+        			console.log("View For " +  whichId);
+         			$.ajax({
+	        			type:"GET",
+	        			url:"/fullThread/"+whichId,
+	        			dataType:"json",
+	        			success:function(data){
+	        				console.log("Successfully Loaded Thread");
+	        				console.log(data)
+	        				var i =0;
+	        				for(i=0; i<data.length;i++){
+	        					$("#output").append(applyTemplate("post", data[i]));
+	        					var lastChild = $('#output').children('.entry').last();
+	        					lastChild.find(".button-view").click(viewCallback);
+	        					lastChild.find(".button-reply").click(replyCallback);
+	        				}
+	        			}
+	        		});       			
         		};        		
         		
         		$("#btnSearch").click(function(event){
