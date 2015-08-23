@@ -65,6 +65,9 @@ public class Post {
 	@Transient
 	private String repliesTo;
 	
+	private String url;
+	
+	private String origin;
 	
 	public long get_id() {
 		return _id;
@@ -231,6 +234,26 @@ public class Post {
 
 	public void setRepliesTo(String repliesTo) {
 		this.repliesTo = repliesTo;
+	}
+
+
+	public String getUrl() {
+		return url;
+	}
+
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+
+	public String getOrigin() {
+		return origin;
+	}
+
+
+	public void setOrigin(String origin) {
+		this.origin = origin;
 	}
 
 	

@@ -2,6 +2,7 @@ package us.categorize.conversation.controller;
 
 import java.security.Principal;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -27,6 +28,13 @@ public class InitialController {
     @RequestMapping("/")
     public String home(HttpServletRequest request, Principal currentUser, Model model) {
         setupModel(request, currentUser, model);
+        for(Cookie cookie : request.getCookies()){
+        	System.out.println("COOKIE ");
+        	System.out.println(cookie.getName());
+        	System.out.println(cookie.getValue());
+        	System.out.println(cookie.getDomain());
+        	System.out.println(cookie.getMaxAge());
+        }
         return "home";
     }
     @RequestMapping("/greeting")

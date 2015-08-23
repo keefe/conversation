@@ -35,7 +35,9 @@ create table if not exists  UserProfile (
 create table if not exists posts(
 	id bigint not null, 
 	title varchar(255), 
-	body text, 
+	body text,
+	url text,
+	origin text,
 	parentId bigint, 
 	threadId bigint,
 	createdAt timestamp, 
@@ -52,6 +54,7 @@ create table if not exists posts(
 
 /*
 create sequence post_sequence;
+create unique index idx_posts_url on posts(url);
 create unique index ix_auth_username on authorities (username,authority);  
 create unique index UserConnectionRank on UserConnection(userId, providerId, rank);
 create unique index UserProfilePK on UserProfile(userId);

@@ -62,6 +62,7 @@
         		};
         		
 			var initialize = function(){
+				console.log(document.cookie);
 			    var template = "No Load"
 			    var i;
 			    for(i=0; i<templateNames.length;i++){

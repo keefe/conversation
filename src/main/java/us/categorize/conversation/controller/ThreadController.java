@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.Principal;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,13 @@ public class ThreadController {
 	
 	@RequestMapping(value="/tagged", method = RequestMethod.GET)
 	public List<Post> getByTag(HttpServletRequest request, Principal currentUser, @RequestParam("tags") String tags){
+        for(Cookie cookie : request.getCookies()){
+        	System.out.println("COOKIE ");
+        	System.out.println(cookie.getName());
+        	System.out.println(cookie.getValue());
+        	System.out.println(cookie.getDomain());
+        	System.out.println(cookie.getMaxAge());
+        }
 		try {
 			tags = UriUtils.decode(tags, "UTF-8");
 		} catch (UnsupportedEncodingException e) {
