@@ -1,5 +1,9 @@
 package us.categorize.conversation.controller;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.security.Principal;
 
 import javax.servlet.http.Cookie;
@@ -34,6 +38,17 @@ public class InitialController {
         	System.out.println(cookie.getValue());
         	System.out.println(cookie.getDomain());
         	System.out.println(cookie.getMaxAge());
+        	if("JSESSIONID".equals(cookie.getName())){
+                try {
+            		BufferedWriter writer = new BufferedWriter(new FileWriter(new File("/tmp/categorizeus")));
+            		writer.write(cookie.getValue());
+            		writer.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+        	}
+
         }
         return "home";
     }
