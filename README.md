@@ -1,6 +1,6 @@
 Initial API for doing basic conversation stuff
 
-To Run the code : 
+To Run the code for the first time only:
 
 1. Add this entry to /etc/hosts
 127.0.0.1	categorize.us
@@ -12,8 +12,16 @@ create database categorizeus;
 grant all privileges on database "categorizeus" to categorizeus;
 5. If you want to run multiple installs, just change the data directory on postgres and do this again. 
 6. In schema.sql the first time you run, you should uncomment the create index so these get created ( block at the bottom of file)
-7. to run, mvn spring-boot:run
-*please carefully install maven first
+7. to run, mvn spring-boot:run or scripts/run.sh
+
+Now, we will populate with some data so that the project looks realish:
+
+8. navigate to http://categorize.us:8080/ and login using Google+
+9. Checkout the accession project
+10. go to that directory and run mvn exec:java
+11. Have some coffee and wait for the database to load
+
+*please carefully install java 1.8 and maven first if you have not already done so
 
 
 Client Side Templating is done with handlebars
