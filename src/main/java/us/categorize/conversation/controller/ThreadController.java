@@ -61,6 +61,11 @@ public class ThreadController {
 		return post;
 	}
 	
+	@RequestMapping(value="/entry", method = RequestMethod.GET)
+	public List<Post> topLevelPosts(HttpServletRequest request, Principal currentUser){
+		return service.originPosts();
+	}
+	
 	@RequestMapping(value="/thread", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public Post createThread(HttpServletRequest request, Principal currentUser, @RequestBody Post newThread){
 		UserConnection uc = (UserConnection) request.getSession().getAttribute(InitialController.USER_CONNECTION);

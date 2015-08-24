@@ -27,6 +27,10 @@ public class PostService {
 		return postRepository.findThread(Long.parseLong(threadId));
 	}
 	
+	public List<Post> originPosts(){
+		return postRepository.findTopLevel();
+	}
+	
 	public List<Post> byTag(String... tags){
 		System.out.println("Searching with " + Arrays.toString(tags));
 		if(tags.length>=5){
