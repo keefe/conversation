@@ -30,30 +30,39 @@ create table if not exists  UserProfile (
   lastName varchar(255),
   name  varchar(255),
   username varchar(255),
-  primary key (userId));
+  primary key (userId)
+);
+
+create table if not exist tags(
+	id serial primary key, 
+	tag varchar(255) not null
+);
+
+create table if not exist post_tags(
+	postId bigint, 
+	tagId int
+);
   
 create table if not exists posts(
-	id bigint not null, 
+	id bigserial primary key, 
 	title varchar(255), 
 	body text,
+	shortBody varchar(255),
 	url text,
 	origin text,
 	parentId bigint, 
 	threadId bigint,
 	createdAt timestamp, 
 	authorId varchar(255),
-	tag1 varchar(255),
-	tag2 varchar(255),
-	tag3 varchar(255),
-	tag4 varchar(255),
-	tag5 varchar(255),
 	imageUrl varchar(255),
 	primary key (id)
 );
 
 
 /*
-create sequence post_sequence;
+create index idx_post_tags_post on post_tags(post_id);
+create index idx_post_tags_tag on post_tags(tag_id);
+
 create unique index idx_posts_url on posts(url);
 create unique index ix_auth_username on authorities (username,authority);  
 create unique index UserConnectionRank on UserConnection(userId, providerId, rank);

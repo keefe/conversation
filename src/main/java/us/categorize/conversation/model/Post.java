@@ -22,13 +22,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Post {
 	
 	@Id
-   @SequenceGenerator(name="post_seq",
-            sequenceName="post_sequence",
-            allocationSize=1)
-   @GeneratedValue(strategy = GenerationType.SEQUENCE,
-         generator="post_seq")
-   @Column(name = "id", updatable=false)
-	private long _id; 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", updatable=false)
+	private long id; 
    
 	private String title;
 	
@@ -51,13 +47,7 @@ public class Post {
 	@JsonIgnore
 	private Date createdAt = new Date();
 
-	@JsonIgnore
-	private String tag1,tag2,tag3,tag4,tag5;
-
 	private String imageUrl;
-	
-	@Transient
-	private String tags[];
 	
 	@Transient
 	private String tagString;
@@ -69,14 +59,6 @@ public class Post {
 	
 	private String origin;
 	
-	public long get_id() {
-		return _id;
-	}
-
-
-	public void set_id(long _id) {
-		this._id = _id;
-	}
 
 
 	public String getTitle() {
@@ -139,55 +121,6 @@ public class Post {
 	}
 
 
-	public String getTag1() {
-		return tag1;
-	}
-
-
-	public void setTag1(String tag1) {
-		this.tag1 = tag1;
-	}
-
-
-	public String getTag2() {
-		return tag2;
-	}
-
-
-	public void setTag2(String tag2) {
-		this.tag2 = tag2;
-	}
-
-
-	public String getTag3() {
-		return tag3;
-	}
-
-
-	public void setTag3(String tag3) {
-		this.tag3 = tag3;
-	}
-
-
-	public String getTag4() {
-		return tag4;
-	}
-
-
-	public void setTag4(String tag4) {
-		this.tag4 = tag4;
-	}
-
-
-	public String getTag5() {
-		return tag5;
-	}
-
-
-	public void setTag5(String tag5) {
-		this.tag5 = tag5;
-	}
-
 
 	public String getImageUrl() {
 		return imageUrl;
@@ -198,25 +131,7 @@ public class Post {
 		this.imageUrl = imageUrl;
 	}
 
-
-	public String[] getTags() {
-		if(tags==null){
-			tags = new String[]{tag1,tag2,tag3,tag4,tag5};
-		}
-		return tags;
-	}
-
-	
-
-	public void setTags(String[] tags) {
-		this.tags = tags;
-	}
-
-
 	public String getTagString() {
-		if(tagString==null){
-			tagString = Arrays.toString(getTags());			
-		}
 		return tagString;
 	}
 
@@ -254,6 +169,16 @@ public class Post {
 
 	public void setOrigin(String origin) {
 		this.origin = origin;
+	}
+
+
+	public long getId() {
+		return id;
+	}
+
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	

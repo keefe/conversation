@@ -72,21 +72,6 @@ public class ThreadController {
 		newThread.setUser(uc);
 		if(newThread.getTagString() !=null){
 			String tags[] = newThread.getTagString().split(" ");
-			if(tags.length>=1){
-				newThread.setTag1(tags[0]);
-			}
-			if(tags.length>=2){
-				newThread.setTag2(tags[1]);
-			}
-			if(tags.length>=3){
-				newThread.setTag3(tags[2]);
-			}
-			if(tags.length>=4){
-				newThread.setTag4(tags[3]);
-			}
-			if(tags.length>=5){
-				newThread.setTag5(tags[4]);
-			}
 		}
 		if(newThread.getRepliesTo()!=null && !"".equals(newThread.getRepliesTo().trim())){
 			System.out.println("Deal with replies " + newThread.getRepliesTo());

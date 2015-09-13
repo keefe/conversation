@@ -42,3 +42,4 @@ drop table posts;
 drop table userconnection;
 
 
+tables are currently in flux, need to figure out cross reference table mapping
