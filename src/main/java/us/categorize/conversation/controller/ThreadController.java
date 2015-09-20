@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriUtils;
 
 import us.categorize.conversation.model.Post;
+import us.categorize.conversation.model.Tag;
 import us.categorize.conversation.model.UserConnection;
 import us.categorize.conversation.service.PostService;
 
@@ -70,26 +71,7 @@ public class ThreadController {
 	public Post createThread(HttpServletRequest request, Principal currentUser, @RequestBody Post newThread){
 		UserConnection uc = (UserConnection) request.getSession().getAttribute(InitialController.USER_CONNECTION);
 		newThread.setUser(uc);
-		if(newThread.getTagString() !=null){
-			String tags[] = newThread.getTagString().split(" ");
-		}
-		if(newThread.getRepliesTo()!=null && !"".equals(newThread.getRepliesTo().trim())){
-			System.out.println("Deal with replies " + newThread.getRepliesTo());
-			Post repliesPost = service.get(Long.parseLong(newThread.getRepliesTo()));
-			newThread.setParent(repliesPost);
-			if(repliesPost!=null){
-				if(repliesPost.getThread()!=null){
-					newThread.setThread(repliesPost.getThread());
-				}else{
-					newThread.setThread(repliesPost);
-				}
-			}
-		}
-		if(newThread.getThread()==null){
-			newThread.setThread(newThread);
-		}
 		service.set(newThread);
-		
         return newThread;
 	}
 }

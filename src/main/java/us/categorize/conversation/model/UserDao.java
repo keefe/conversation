@@ -1,4 +1,4 @@
-package us.categorize.conversation.dao;
+package us.categorize.conversation.model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,9 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-
-import us.categorize.conversation.model.UserConnection;
-import us.categorize.conversation.model.UserProfile;
 
 @Repository
 public class UserDao {

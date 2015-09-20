@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionSignUp;
 
-import us.categorize.conversation.dao.UserDao;
+import us.categorize.conversation.model.UserDao;
 import us.categorize.conversation.model.UserProfile;
 
 public class AccountConnectionSignupService implements ConnectionSignUp {

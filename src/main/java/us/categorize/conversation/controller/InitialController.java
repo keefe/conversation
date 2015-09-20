@@ -17,8 +17,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import us.categorize.conversation.dao.UserDao;
 import us.categorize.conversation.model.UserConnection;
+import us.categorize.conversation.model.UserDao;
 import us.categorize.conversation.model.UserProfile;
 
 @Controller

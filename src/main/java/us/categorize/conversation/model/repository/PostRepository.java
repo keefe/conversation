@@ -1,9 +1,11 @@
-package us.categorize.conversation.model;
+package us.categorize.conversation.model.repository;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+
+import us.categorize.conversation.model.Post;
 
 public interface PostRepository extends CrudRepository<Post, Long> {
 	@Query(value="SELECT * from posts where (tag1=?1 or tag2=?1 or tag3=?1 or tag4=?1 or tag5=?1)", nativeQuery=true)

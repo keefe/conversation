@@ -33,14 +33,14 @@ create table if not exists  UserProfile (
   primary key (userId)
 );
 
-create table if not exist tags(
-	id serial primary key, 
+create table if not exists tags(
+	id bigserial primary key, 
 	tag varchar(255) not null
 );
 
-create table if not exist post_tags(
+create table if not exists post_tags(
 	postId bigint, 
-	tagId int
+	tagId bigint
 );
   
 create table if not exists posts(
@@ -54,8 +54,7 @@ create table if not exists posts(
 	threadId bigint,
 	createdAt timestamp, 
 	authorId varchar(255),
-	imageUrl varchar(255),
-	primary key (id)
+	imageUrl varchar(255)
 );
 
 

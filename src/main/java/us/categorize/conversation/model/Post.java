@@ -1,7 +1,8 @@
 package us.categorize.conversation.model;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,8 +11,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -58,9 +60,17 @@ public class Post {
 	private String url;
 	
 	private String origin;
+
+	//(cascade = {CascadeType.PERSIST, CascadeType.MERGE}) why does this cause double entries?
+	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
+	@JoinTable(
+			name="post_tags",
+			joinColumns={@JoinColumn(name="postId", referencedColumnName="id")},
+			inverseJoinColumns={@JoinColumn(name="tagId", referencedColumnName="id")}
+	)
+	private List<Tag> tags = new ArrayList<Tag>();
+
 	
-
-
 	public String getTitle() {
 		return title;
 	}
@@ -179,6 +189,16 @@ public class Post {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+
+	public List<Tag> getTags() {
+		return tags;
+	}
+
+
+	public void setTags(List<Tag> tags) {
+		this.tags = tags;
 	}
 
 	

@@ -16,7 +16,7 @@ import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
 import org.springframework.social.google.connect.GoogleConnectionFactory;
 import org.springframework.social.security.AuthenticationNameUserIdSource;
 
-import us.categorize.conversation.dao.UserDao;
+import us.categorize.conversation.model.UserDao;
 import us.categorize.conversation.service.AccountConnectionSignupService;
 
 @Configuration
