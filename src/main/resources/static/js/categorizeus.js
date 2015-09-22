@@ -43,7 +43,7 @@ var getTemplate = function(name, callback) {
 	callback(Handlebars.compile(src));
  });
 }
-var templateNames = ["post", "newpost", "post"]
+var templateNames = ["post", "newpost"]
 var templates = {}
 var applyTemplate = function(templateName, data){
 	return templates[templateName](data);
@@ -146,7 +146,7 @@ var loadTopStories = function(){
 			success:function(data){
 				console.log("We've had some success then loadTopStories");
 				console.log(data)
-				displayPosts(data, "wp_post")
+				displayPosts(data, "post")
 			}
 		});
 };
