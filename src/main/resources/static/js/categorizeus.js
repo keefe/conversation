@@ -43,7 +43,7 @@ var getTemplate = function(name, callback) {
 	callback(Handlebars.compile(src));
  });
 }
-var templateNames = ["post", "newpost", "wp_post"]
+var templateNames = ["post", "newpost", "post"]
 var templates = {}
 var applyTemplate = function(templateName, data){
 	return templates[templateName](data);
