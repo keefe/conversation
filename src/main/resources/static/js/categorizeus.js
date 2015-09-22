@@ -78,13 +78,7 @@ var viewCallback = function(event){
 		success:function(data){
 			console.log("Successfully Loaded Thread");
 			console.log(data)
-			var i =0;
-			for(i=0; i<data.length;i++){
-				$("#output").append(applyTemplate("post", data[i]));
-				var lastChild = $('#output').children('.entry').last();
-				lastChild.find(".button-view").click(viewCallback);
-				lastChild.find(".button-reply").click(replyCallback);
-			}
+			displayPosts(data, "post");
 		}
 	});       			
 };  
@@ -112,18 +106,21 @@ var loadPostFunction = function(event){
 			dataType:"json",
 			success:function(data){
 				console.log("We've had some success in load post then");
-				var i =0;
-				for(i=0; i<data.length;i++){
-					$("#output").append(applyTemplate("post", data[i]));
-					var lastChild = $('#output').children('.entry').last();
-					lastChild.find(".button-view").click(viewCallback);
-					lastChild.find(".button-reply").click(replyCallback);
-				}
+				displayPosts(data, "post")
 			}
 		});        			
 		
 		
 };
+var displayPosts = function(data, template){
+	var i =0;
+	for(i=0; i<data.length;i++){
+		$("#output").append(applyTemplate(template, data[i]));
+		var lastChild = $('#'+data[i].id);
+		lastChild.find(".button-view").click(viewCallback);
+		lastChild.find(".button-reply").click(replyCallback);
+	}
+}
 var searchFunction = function(event){
 	    event.preventDefault();
 		var whichTags = $("#txtSearch").val();
@@ -135,13 +132,7 @@ var searchFunction = function(event){
 			success:function(data){
 				console.log("We've had some success then");
 				console.log(data)
-				var i =0;
-				for(i=0; i<data.length;i++){
-					$("#output").append(applyTemplate("post", data[i]));
-					var lastChild = $('#output').children('.entry').last();
-					lastChild.find(".button-view").click(viewCallback);
-					lastChild.find(".button-reply").click(replyCallback);
-				}
+				displayPosts(data, "post")
 			}
 		});
 };
@@ -155,13 +146,7 @@ var loadTopStories = function(){
 			success:function(data){
 				console.log("We've had some success then loadTopStories");
 				console.log(data)
-				var i =0;
-				for(i=0; i<data.length;i++){
-					$("#output").append(applyTemplate("post", data[i]));
-					var lastChild = $('#output').children('.entry').last();
-					lastChild.find(".button-view").click(viewCallback);
-					lastChild.find(".button-reply").click(replyCallback);
-				}
+				displayPosts(data, "post")
 			}
 		});
 };
