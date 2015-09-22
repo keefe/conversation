@@ -1,4 +1,4 @@
-  <div class="postLarge" id ="post-{{id}}">
+  <div class="postLarge" id ="{{id}}">
   
     <span class="postHeader">
 	    <span class="postTitle">{{title}}</span>

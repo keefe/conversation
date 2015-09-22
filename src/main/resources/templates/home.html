@@ -11,6 +11,10 @@
 
         <link rel="stylesheet" type="text/css" href="css/bootstrap-social.css" />
         <link rel="stylesheet" type="text/css" href="css/categorizeus.css" />
+        <link rel="stylesheet" type="text/css" href="css/genericons/genericons.css" />
+        <link rel="stylesheet" type="text/css" href="css/wp/style.css" />
+        <link rel="stylesheet" type="text/css" href="css/wp/editor-style.css" />
+
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" />
@@ -36,19 +40,18 @@
 			<input type="button" id="btnSearch" value="Search"/> 
 			<input type="button" id="btnLoad" value="Load"/>               
         </div>
-                 <div class="newThread" style="display:none">
-        		</div>		  
-        <div id="output"></div>
+	    <div class="newThread" style="display:none">
+		</div>		  
+
+        <div id="primary" class="content-area">
+        	<main id="main" class="site-main" role="main">
+        		
+        	
+        	</main>
+        </div>
+        
         <div class="container">
-
-           	<div th:replace="fragments/exception :: errorInfo"/>
-
-        </div><!-- /.container -->
-        
-        <!--
-                        <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
-        
-        
-        -->
+        	<div th:replace="fragments/exception :: errorInfo"/>
+        </div>
     </body>
 </html>

@@ -43,7 +43,7 @@ var getTemplate = function(name, callback) {
 	callback(Handlebars.compile(src));
  });
 }
-var templateNames = ["post", "newpost"]
+var templateNames = ["post", "newpost", "wp_post"]
 var templates = {}
 var applyTemplate = function(templateName, data){
 	return templates[templateName](data);
@@ -68,7 +68,7 @@ var replyCallback = function(event){
 };
 var viewCallback = function(event){
 	var target = $( event.target );
-	$("#output").html("");
+	$("#main").html("");
 	var whichId = findId(event);
 	console.log("View For " +  whichId);
 	$.ajax({
@@ -97,7 +97,7 @@ var findId = function(event){
 
 var loadPostFunction = function(event){
 		event.preventDefault();	
-		$("#output").html("");
+		$("#main").html("");
 		var whichId = $("#txtSearch").val();
 		console.log("We'd like to load " + whichId);        			
 		$.ajax({
@@ -115,8 +115,8 @@ var loadPostFunction = function(event){
 var displayPosts = function(data, template){
 	var i =0;
 	for(i=0; i<data.length;i++){
-		$("#output").append(applyTemplate(template, data[i]));
-		var lastChild = $('#'+data[i].id);
+		$("#main").append(applyTemplate(template, data[i]));
+		var lastChild = $('#post-'+data[i].id);
 		lastChild.find(".button-view").click(viewCallback);
 		lastChild.find(".button-reply").click(replyCallback);
 	}
@@ -124,7 +124,7 @@ var displayPosts = function(data, template){
 var searchFunction = function(event){
 	    event.preventDefault();
 		var whichTags = $("#txtSearch").val();
-		$("#output").html("");
+		$("#main").html("");
 		$.ajax({
 			type:"GET",
 			url:"/tagged?tags="+whichTags,
@@ -138,7 +138,7 @@ var searchFunction = function(event){
 };
 
 var loadTopStories = function(){
-		$("#output").html("");
+		$("#main").html("");
 		$.ajax({
 			type:"GET",
 			url:"/entry",
@@ -146,7 +146,7 @@ var loadTopStories = function(){
 			success:function(data){
 				console.log("We've had some success then loadTopStories");
 				console.log(data)
-				displayPosts(data, "post")
+				displayPosts(data, "wp_post")
 			}
 		});
 };
