@@ -43,3 +43,7 @@ drop table userconnection;
 
 
 tables are currently in flux, need to figure out cross reference table mapping
+
+
+drop sequence post_sequence;
+drop table authorities, post_sequence, post_tags, posts, tags, userconnection, userprofile, users;

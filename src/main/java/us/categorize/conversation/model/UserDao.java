@@ -14,7 +14,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class UserDao {
+public class UserDao { //definitely does not belong in the model
 	 private static final Logger LOG = LoggerFactory.getLogger(UserDao.class);
 
 	    private JdbcTemplate jdbcTemplate;
